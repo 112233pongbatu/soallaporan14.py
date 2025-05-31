@@ -1,0 +1,27 @@
+def kata_sama_di_file(file1, file2):
+    try:
+        with open(file1) as f1, open(file2) as f2:
+            kata1 = set(f1.read().lower().split())
+            kata2 = set(f2.read().lower().split())
+            return kata1 & kata2
+    except FileNotFoundError as e:
+        print("File tidak ditemukan:", e.filename)
+        return None
+    except Exception as e:
+        print("Terjadi kesalahan:", e)
+        return None
+
+# Input dari user
+f1 = input("Nama file 1: ")
+f2 = input("Nama file 2: ")
+
+# Panggil fungsi
+hasil = kata_sama_di_file(f1, f2)
+
+# Tampilkan hasil jika tidak None
+if hasil is not None:
+    if hasil:
+        print("\nKata yang sama di kedua file:")
+        print(*sorted(hasil), sep="\n- ")
+    else:
+        print("\nTidak ada kata yang sama di kedua file.")
